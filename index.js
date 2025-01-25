@@ -10,6 +10,19 @@ dotenv.config({ path: ".env.local" });
 
 app.use(express.json());
 
+
+app.use(
+	cors({
+	  origin: [
+		"http://localhost:5173",
+		"https://hackathon-backend-production-2663.up.railway.app/",
+	  ],
+	  methods: ["GET", "POST", "PUT", "DELETE"],
+	  allowedHeaders: ["Content-Type", "Authorization"],
+	  credentials: true, // Required for cookies
+	})
+  );
+
 connectDB();
 
 app.get("/", (req, res) => {
@@ -19,17 +32,7 @@ app.get("/", (req, res) => {
 // all routes
 app.use("/users", usersRoutes);
 
-app.use(
-	cors({
-		origin: [
-			"http://localhost:5173", // Allow localhost for development
-			"https://smit-hakhaton-frontend.vercel.app", // Allow Vercel URL for production
-		], // Allow these specific frontend addresses
-		methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-		allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-		credentials: true, // Allows cookies to be sent
-	})
-);
+
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);
