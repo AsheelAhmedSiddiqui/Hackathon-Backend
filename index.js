@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./lib/connectDB.js";
 import usersRoutes from "./routes/users.js";
+import categoriesRoutes from "./routes/categories.js";
+import subcategoriesRoutes from "./routes/subcategories.js";
 
 const app = express();
 const port = 3010;
@@ -31,6 +33,8 @@ app.get("/", (req, res) => {
 
 // all routes
 app.use("/users", usersRoutes);
+app.use("/categories", categoriesRoutes);
+app.use("/subcategories", subcategoriesRoutes);
 
 
 
